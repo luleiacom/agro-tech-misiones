@@ -175,5 +175,3 @@ export class AppComponent {
     this.loteSeleccionado = null;
   }
 }
-
-bootstrapApplication(AppComponent);
