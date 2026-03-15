@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { bootstrapApplication } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -127,8 +126,8 @@ export class AppComponent {
 
   lotes = [
     { id: 1, nombre: 'Lote Norte - Cítricos', tipo: 'Cítricos', salud: 0.85 },
-    { id: 2, nombre: 'Lote Sur - Yerba', tipo: 'Yerba Mate', salud: 0.45 },
-    { id: 3, nombre: 'Potrero Km 12', tipo: 'Yerba Mate', salud: 0.15 },
+    { id: 2, nombre: 'Cuadro San Pedro - Yerba', tipo: 'Yerba Mate', salud: 0.45 },
+    { id: 3, nombre: 'Lote Experimental Km 12', tipo: 'Té', salud: 0.15 },
     { id: 4, nombre: 'Parcela Té Superior', tipo: 'Té', salud: 0.72 },
     { id: 5, nombre: 'Lote Este - Cítricos', tipo: 'Cítricos', salud: 0.38 }
   ];
