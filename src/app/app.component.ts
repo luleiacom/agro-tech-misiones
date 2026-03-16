@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./app.css'],
   template: `
     <div class="dashboard-container">
+      
       <nav class="navbar">
         <div class="logo-section">
           <div class="logo-icon">🛰️</div>
@@ -21,6 +22,7 @@ import { FormsModule } from '@angular/forms';
       </nav>
 
       <div class="main-layout">
+        
         <aside class="sidebar">
           <div class="card filters">
             <h4>FILTROS RÁPIDOS</h4>
@@ -71,6 +73,25 @@ import { FormsModule } from '@angular/forms';
           </div>
         </main>
       </div>
+
+      <div *ngIf="loteSeleccionado" class="suggestion-panel">
+        <div class="card suggestion-card" [style.border-left-color]="getColor(loteSeleccionado.salud)">
+          <div class="suggestion-header">
+            <h3>🌱 Análisis de Estado: {{ loteSeleccionado.nombre }}</h3>
+            <button (click)="loteSeleccionado = null" class="close-btn">✕</button>
+          </div>
+          
+          <div class="suggestion-content">
+            <p class="suggestion-text">
+              <strong>Diagnóstico:</strong> {{ getRecomendacion(loteSeleccionado.salud) }}
+            </p>
+            <div class="action-steps">
+              <span><strong>Acción Sugerida:</strong> {{ getAccion(loteSeleccionado.salud) }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   `
 })
@@ -87,7 +108,9 @@ export class AppComponent {
     { id: 5, nombre: 'Lote Este - Cítricos', tipo: 'Cítricos', salud: 0.38 }
   ];
 
-  seleccionarLote(lote: any) { this.loteSeleccionado = lote; }
+  seleccionarLote(lote: any) { 
+    this.loteSeleccionado = lote; 
+  }
   
   calcularPromedio() {
     const sum = this.lotes.reduce((acc, l) => acc + l.salud, 0);
@@ -114,5 +137,18 @@ export class AppComponent {
     if (salud >= 0.7) return '#27ae60';
     if (salud >= 0.3) return '#f39c12';
     return '#e74c3c';
+  }
+
+  // --- LOGICA DE DEVOLUCION ---
+  getRecomendacion(salud: number): string {
+    if (salud >= 0.7) return 'Vigor óptimo detectado por satélite. Los niveles de clorofila son estables y no se requiere intervención inmediata.';
+    if (salud >= 0.3) return 'Estrés hídrico detectado. Los índices VARI indican una baja en la densidad foliar. Se recomienda revisar el sistema de riego.';
+    return 'Alerta de salud crítica. Los valores NDVI indican posible plaga o sequía severa. Es necesaria una inspección técnica presencial inmediata.';
+  }
+
+  getAccion(salud: number): string {
+    if (salud >= 0.7) return 'Continuar con el monitoreo de rutina cada 7 días.';
+    if (salud >= 0.3) return 'Ajustar frecuencia de riego y evaluar fertilización de refuerzo.';
+    return 'Activar protocolo de emergencia y suspender tareas de poda hasta inspección.';
   }
 }
