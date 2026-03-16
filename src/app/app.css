@@ -1,100 +1,149 @@
-/* --- ESTILOS CORRECTOS PARA CELULAR --- */
-
-/* 1. Evitamos que cualquier cosa se desborde horizontalmente */
-* {
-  box-sizing: border-box;
+/* RESET GENERAL */
+* { 
+  box-sizing: border-box; 
+  margin: 0; 
+  padding: 0; 
 }
 
-.dashboard-container {
+.dashboard-container { 
+  font-family: 'Inter', sans-serif; 
+  background: #f0f2f0; 
+  min-height: 100vh;
   width: 100%;
-  max-width: 100vw;
-  overflow-x: hidden;
-  margin: 0;
-  padding: 0;
+  overflow-x: hidden; /* Evita que la pantalla se mueva de costado en iPhone */
 }
 
-/* 2. El layout principal cambia para el celu: columna */
-.main-layout {
-  display: flex;
-  flex-direction: column; /* Apila filtros arriba, lotes abajo */
-  width: 100%;
-  padding: 10px;
-  gap: 15px;
+/* BARRA DE NAVEGACIÓN */
+.navbar { 
+  background: #0d260a; 
+  color: white; 
+  padding: 15px 20px; 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center;
+  border-bottom: 4px solid #27ae60;
 }
+.logo-section { display: flex; align-items: center; gap: 10px; }
+.navbar h1 { font-size: 1.1rem; margin: 0; }
+.navbar span { color: #27ae60; }
+.user-info { text-align: right; font-size: 0.8rem; }
+.user-info span { display: block; opacity: 0.8; }
 
-/* 3. La barra lateral de filtros ocupa todo el ancho */
-.sidebar {
-  width: 100%;
-}
-
-.filters {
-  width: 100%;
-  margin-bottom: 10px;
-}
-
-.filter-group {
-  display: grid;
-  grid-template-columns: 1fr 1fr; /* Dos botones por fila */
-  gap: 8px;
-  width: 100%;
-}
-
-.filter-btn {
-  width: 100%;
-  text-align: center;
-}
-
-/* 4. EL ARREGLO CLAVE: El Buscador */
-.search-bar {
-  width: 100%;
-  margin-bottom: 15px;
-}
-
-.search-bar input {
-  width: 100% !important; /* Forzamos el 100% */
-  max-width: 100% !important;
-  box-sizing: border-box; /* Fundamental: el padding se queda adentro */
-  font-size: 16px; /* Evita zoom automático en iPhone */
-  padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-}
-
-/* 5. Las tarjetas de los lotes se apilan en una sola columna */
-.grid-lotes {
-  display: grid;
-  grid-template-columns: 1fr; /* Una sola tarjeta por fila */
-  gap: 15px;
+/* DISEÑO RESPONSIVO (MOBILE FIRST) */
+.main-layout { 
+  display: flex; 
+  flex-direction: column; /* Uno abajo del otro en el celu */
+  padding: 15px; 
+  gap: 20px; 
   width: 100%;
 }
 
-.lote-card {
-  width: 100%;
+.sidebar { width: 100%; }
+
+/* BUSCADOR */
+.search-bar input { 
+  width: 100%; 
+  padding: 15px; 
+  border-radius: 12px; 
+  border: 1px solid #ddd; 
+  margin-bottom: 20px; 
+  font-size: 16px; 
+  box-sizing: border-box; /* Clave para que no se escape de la pantalla */
 }
 
-/* --- ESTILOS PARA COMPUTADORA (Solo screens grandes) --- */
+/* GRILLA DE LOTES */
+.grid-lotes { 
+  display: grid; 
+  grid-template-columns: 1fr; /* Una sola columna en el celu */
+  gap: 20px; 
+}
+
+/* AJUSTES PARA PC (A partir de tablets/computadoras) */
 @media (min-width: 768px) {
-  .main-layout {
-    flex-direction: row; /* Vuelven a estar lado a lado */
-    padding: 20px;
+  .main-layout { 
+    flex-direction: row; 
+    max-width: 1400px; 
+    margin: 0 auto; 
   }
-  
-  .sidebar {
-    width: 280px; /* Tamaño fijo */
-  }
-
-  .filter-group {
-    display: flex;
-    flex-direction: column; /* Botones uno abajo del otro */
-  }
-
-  .grid-lotes {
-    grid-template-columns: repeat(2, 1fr); /* 2 columnas en tablets */
-  }
+  .sidebar { width: 300px; flex-shrink: 0; }
+  .navbar { padding: 15px 40px; }
+  .navbar h1 { font-size: 1.5rem; }
+  .grid-lotes { grid-template-columns: repeat(2, 1fr); }
 }
 
-@media (min-width: 1024px) {
-  .grid-lotes {
-    grid-template-columns: repeat(3, 1fr); /* 3 columnas en PC */
-  }
+@media (min-width: 1100px) {
+  .grid-lotes { grid-template-columns: repeat(3, 1fr); }
 }
+
+/* TARJETAS Y FILTROS */
+.card { 
+  background: white; 
+  padding: 20px; 
+  border-radius: 15px; 
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05); 
+  margin-bottom: 20px; 
+}
+
+.filter-group { 
+  display: grid; 
+  grid-template-columns: 1fr 1fr; 
+  gap: 10px; 
+}
+
+@media (min-width: 768px) { 
+  .filter-group { display: flex; flex-direction: column; } 
+}
+
+.filter-btn { 
+  border: none; 
+  padding: 10px; 
+  border-radius: 8px; 
+  background: #f8f9fa; 
+  cursor: pointer; 
+  font-weight: 500; 
+  transition: 0.3s;
+}
+
+.filter-btn.active { background: #1b3d17; color: white; }
+.filter-btn.red { color: #e74c3c; }
+.filter-btn.orange { color: #f39c12; }
+.filter-btn.green { color: #27ae60; }
+
+/* ESTILO DE CADA LOTE */
+.lote-card { 
+  background: white; 
+  padding: 20px; 
+  border-radius: 12px; 
+  cursor: pointer; 
+  transition: transform 0.2s; 
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05); 
+}
+.lote-card:hover { transform: translateY(-3px); }
+.lote-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; }
+.badge { color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
+
+/* BARRAS DE PROGRESO (SALUD) */
+.progress-container { 
+  background: #eee; 
+  height: 10px; 
+  border-radius: 5px; 
+  margin: 15px 0; 
+  overflow: hidden; 
+}
+.progress-bar { height: 100%; transition: width 0.5s ease; }
+.stats-mini { display: flex; justify-content: space-between; font-size: 0.8rem; color: #666; }
+
+/* TARJETA DE ESTADO Y BOTÓN */
+.status-card { background: #1b3d17; color: white; text-align: center; }
+.action-btn { 
+  background: #27ae60; 
+  color: white; 
+  border: none; 
+  width: 100%; 
+  padding: 12px; 
+  border-radius: 10px; 
+  font-weight: bold; 
+  cursor: pointer; 
+  margin-top: 10px; 
+}
+.action-btn:active { transform: scale(0.98); }
