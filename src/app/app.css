@@ -1,0 +1,51 @@
+/* Estilos Base */
+.dashboard-container { 
+  font-family: 'Inter', sans-serif; 
+  background: #f0f2f0; 
+  min-height: 100vh; 
+}
+
+.navbar { 
+  background: #0d260a; 
+  color: white; 
+  padding: 15px 20px; 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  border-bottom: 4px solid #27ae60; 
+}
+
+/* Diseño para Celular (por defecto) */
+.main-layout { 
+  display: flex; 
+  padding: 20px; 
+  gap: 20px; 
+  flex-direction: column; 
+}
+
+.grid-lotes { 
+  display: grid; 
+  grid-template-columns: 1fr; 
+  gap: 15px; 
+}
+
+/* Diseño para Computadora */
+@media (min-width: 768px) {
+  .main-layout { 
+    flex-direction: row; 
+    max-width: 1400px; 
+    margin: 0 auto; 
+  }
+  .sidebar { width: 280px; }
+  .grid-lotes { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* Tarjetas de Lotes */
+.lote-card { 
+  background: white; 
+  padding: 15px; 
+  border-radius: 12px; 
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05); 
+}
+
+.badge { color: white; padding: 2px 8px; border-radius: 5px; font-weight: bold; }
