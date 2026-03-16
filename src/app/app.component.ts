@@ -134,7 +134,7 @@ export class AppComponent {
   lotes = [
     { id: 1, nombre: 'Cuadro Norte - Cítricos', tipo: 'Cítricos', salud: 0.85 },
     { id: 2, nombre: 'Lote San Pedro - Yerba', tipo: 'Yerba Mate', salud: 0.45 },
-    { id: 3, nombre: 'Cuadro Km 12 - Té', tipo: 'Té', salud: 0.15 },
+    { id: 3, nombre: 'Cuadro Sur - Té', tipo: 'Té', salud: 0.15 },
     { id: 4, nombre: 'Parcela Té Superior', tipo: 'Té', salud: 0.72 },
     { id: 5, nombre: 'Lote Este - Cítricos', tipo: 'Cítricos', salud: 0.38 }
   ];
