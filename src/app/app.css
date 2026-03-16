@@ -1,51 +1,91 @@
-/* 1. Ajuste del Layout Principal */
+/* --- ESTILOS CORRECTOS PARA CELULAR --- */
+
+/* 1. Evitamos que cualquier cosa se desborde horizontalmente */
+* {
+  box-sizing: border-box;
+}
+
+.dashboard-container {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+/* 2. El layout principal cambia para el celu: columna */
 .main-layout {
   display: flex;
-  flex-direction: column; /* En el celu, uno abajo del otro */
-  padding: 10px; /* Menos espacio en los bordes para ganar lugar */
+  flex-direction: column; /* Apila filtros arriba, lotes abajo */
+  width: 100%;
+  padding: 10px;
   gap: 15px;
 }
 
-/* 2. Ajuste de la Barra Lateral (Filtros) */
+/* 3. La barra lateral de filtros ocupa todo el ancho */
 .sidebar {
-  width: 100%; /* Que ocupe todo el ancho en el celu */
+  width: 100%;
+}
+
+.filters {
+  width: 100%;
+  margin-bottom: 10px;
 }
 
 .filter-group {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* Dos botones por fila para que no sean tan largos */
+  grid-template-columns: 1fr 1fr; /* Dos botones por fila */
   gap: 8px;
-}
-
-/* 3. El Buscador (Importante para que no se vea feo) */
-.search-bar input {
   width: 100%;
-  padding: 12px;
-  font-size: 16px; /* Evita que el iPhone haga zoom automático */
-  box-sizing: border-box; /* Para que el padding no lo ensanche */
 }
 
-/* 4. Ajuste de las tarjetas de Lotes */
+.filter-btn {
+  width: 100%;
+  text-align: center;
+}
+
+/* 4. EL ARREGLO CLAVE: El Buscador */
+.search-bar {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.search-bar input {
+  width: 100% !important; /* Forzamos el 100% */
+  max-width: 100% !important;
+  box-sizing: border-box; /* Fundamental: el padding se queda adentro */
+  font-size: 16px; /* Evita zoom automático en iPhone */
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+/* 5. Las tarjetas de los lotes se apilan en una sola columna */
 .grid-lotes {
   display: grid;
-  grid-template-columns: 1fr; /* Una sola tarjeta por fila en celu */
+  grid-template-columns: 1fr; /* Una sola tarjeta por fila */
   gap: 15px;
+  width: 100%;
 }
 
-/* 5. DISEÑO PARA COMPUTADORA (Solo se activa en pantallas grandes) */
+.lote-card {
+  width: 100%;
+}
+
+/* --- ESTILOS PARA COMPUTADORA (Solo screens grandes) --- */
 @media (min-width: 768px) {
   .main-layout {
-    flex-direction: row; /* Vuelven a estar uno al lado del otro */
+    flex-direction: row; /* Vuelven a estar lado a lado */
     padding: 20px;
   }
   
   .sidebar {
-    width: 280px; /* Vuelve a su tamaño fijo */
+    width: 280px; /* Tamaño fijo */
   }
 
   .filter-group {
     display: flex;
-    flex-direction: column; /* Botones uno abajo del otro como antes */
+    flex-direction: column; /* Botones uno abajo del otro */
   }
 
   .grid-lotes {

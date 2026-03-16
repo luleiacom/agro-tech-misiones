@@ -75,8 +75,16 @@ import { FormsModule } from '@angular/forms';
     </div>
 
     <style>
-      /* --- CSS RESPONSIVO --- */
-      .dashboard-container { font-family: 'Inter', sans-serif; background: #f0f2f0; min-height: 100vh; }
+      /* RESET GENERAL */
+      * { box-sizing: border-box; }
+
+      .dashboard-container { 
+        font-family: 'Inter', sans-serif; 
+        background: #f0f2f0; 
+        min-height: 100vh;
+        width: 100%;
+        overflow-x: hidden; /* Evita el movimiento lateral en iPhone */
+      }
       
       .navbar { 
         background: #0d260a; color: white; padding: 15px 20px; 
@@ -84,42 +92,59 @@ import { FormsModule } from '@angular/forms';
         border-bottom: 4px solid #27ae60;
       }
       .logo-section { display: flex; align-items: center; gap: 10px; }
-      .logo-icon { background: #27ae60; padding: 5px; border-radius: 5px; }
-      .navbar h1 { font-size: 1.2rem; margin: 0; }
+      .navbar h1 { font-size: 1.1rem; margin: 0; }
       .navbar span { color: #27ae60; }
 
-      /* Celular por defecto */
-      .main-layout { display: flex; padding: 20px; gap: 20px; flex-direction: column; }
+      /* DISEÑO PARA CELULAR */
+      .main-layout { 
+        display: flex; 
+        padding: 15px; 
+        gap: 20px; 
+        flex-direction: column; /* Uno abajo del otro */
+        width: 100%;
+      }
 
-      /* Computadora (Pantallas mayores a 768px) */
+      .sidebar { width: 100%; }
+
+      .search-bar input { 
+        width: 100%; 
+        padding: 15px; 
+        border-radius: 12px; 
+        border: 1px solid #ddd; 
+        margin-bottom: 25px; 
+        font-size: 16px; /* Evita el zoom automático del celu */
+        box-sizing: border-box; 
+      }
+
+      .grid-lotes { display: grid; grid-template-columns: 1fr; gap: 20px; }
+
+      /* DISEÑO PARA PC (Más de 768px) */
       @media (min-width: 768px) {
         .main-layout { flex-direction: row; max-width: 1400px; margin: 0 auto; }
         .sidebar { width: 300px; flex-shrink: 0; }
         .navbar h1 { font-size: 1.5rem; }
+        .grid-lotes { grid-template-columns: repeat(2, 1fr); }
       }
 
+      @media (min-width: 1100px) {
+        .grid-lotes { grid-template-columns: repeat(3, 1fr); }
+      }
+
+      /* TARJETAS Y COMPONENTES */
       .card { background: white; padding: 20px; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 20px; }
-      .filter-group { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .filter-group { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
       @media (min-width: 768px) { .filter-group { display: flex; flex-direction: column; } }
 
       .filter-btn { border: none; padding: 10px; border-radius: 8px; background: #f8f9fa; cursor: pointer; font-weight: 500; }
       .filter-btn.active { background: #1b3d17; color: white; }
 
-      /* Cuadrícula de Lotes Adaptable */
-      .grid-lotes { display: grid; grid-template-columns: 1fr; gap: 20px; }
-      @media (min-width: 600px) { .grid-lotes { grid-template-columns: repeat(2, 1fr); } }
-      @media (min-width: 1100px) { .grid-lotes { grid-template-columns: repeat(3, 1fr); } }
-
       .lote-card { background: white; padding: 20px; border-radius: 12px; cursor: pointer; transition: transform 0.2s; }
-      .lote-card:hover { transform: translateY(-5px); }
-      .lote-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; }
       .badge { color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
 
       .progress-container { background: #eee; height: 10px; border-radius: 5px; margin: 15px 0; overflow: hidden; }
       .progress-bar { height: 100%; transition: width 0.5s ease; }
       .stats-mini { display: flex; justify-content: space-between; font-size: 0.8rem; color: #666; }
 
-      .search-bar input { width: 100%; padding: 15px; border-radius: 12px; border: 1px solid #ddd; margin-bottom: 25px; font-size: 1rem; box-sizing: border-box; }
       .status-card { background: #1b3d17; color: white; text-align: center; }
       .action-btn { background: #27ae60; color: white; border: none; width: 100%; padding: 12px; border-radius: 10px; font-weight: bold; cursor: pointer; margin-top: 10px; }
     </style>
@@ -130,7 +155,6 @@ export class AppComponent {
   filtroEstado: string = 'todos';
   loteSeleccionado: any = null;
 
-  // Lotes corregidos
   lotes = [
     { id: 1, nombre: 'Cuadro Norte - Cítricos', tipo: 'Cítricos', salud: 0.85 },
     { id: 2, nombre: 'Lote San Pedro - Yerba', tipo: 'Yerba Mate', salud: 0.45 },
